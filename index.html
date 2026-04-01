@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>左海产业生态大会 · 场景项目清单</title>
+    <!-- 字体与图标库 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f9fe;
+            color: #1a2c3e;
+            padding: 0 0 32px 0;
+            line-height: 1.45;
+        }
+
+        /* 主容器 */
+        .app-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Hero 区域 精简但保留大气 */
+        .hero-mini {
+            background: linear-gradient(125deg, #0c3b2f, #1b6b58);
+            margin: 16px 0 20px 0;
+            border-radius: 32px;
+            padding: 24px 20px;
+            color: white;
+            box-shadow: 0 12px 24px -10px rgba(0,32,32,0.2);
+        }
+        .hero-mini h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        .hero-mini h1 i {
+            font-size: 1.6rem;
+            background: rgba(255,255,255,0.15);
+            padding: 6px;
+            border-radius: 50%;
+        }
+        .hero-mini .sub {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-bottom: 12px;
+        }
+        .keyword-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .keyword-cloud span {
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(2px);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        /* 筛选栏 - 简洁水平滑动 */
+        .filter-bar {
+            margin: 8px 0 20px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: thin;
+            padding-bottom: 6px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .filter-buttons {
+            display: inline-flex;
+            gap: 10px;
+            flex-wrap: nowrap;
+        }
+        .filter-chip {
+            background: #ffffff;
+            border: 1px solid #dce5ed;
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1f5e4c;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+        .filter-chip i {
+            font-size: 0.75rem;
+        }
+        .filter-chip.active {
+            background: #1b6b58;
+            border-color: #1b6b58;
+            color: white;
+            box-shadow: 0 4px 8px rgba(27,107,88,0.2);
+        }
+        .filter-chip:active {
+            transform: scale(0.96);
+        }
+
+        /* 卡片列表 */
+        .cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        /* 项目卡片 - 手机友好 */
+        .project-card {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.2s;
+            border: 1px solid #eef2f8;
+        }
+        .card-header {
+            padding: 16px 18px 8px 18px;
+            border-bottom: 1px solid #eff3f8;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #115c48;
+            line-height: 1.3;
+            flex: 1;
+            letter-spacing: -0.2px;
+        }
+        .industry-tag {
+            background: #e7f2ef;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1c6e5a;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 10px 18px 0 18px;
+            font-size: 0.7rem;
+            color: #5a6e7c;
+            border-bottom: 1px solid #f0f4f9;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #f8fafd;
+            padding: 4px 10px;
+            border-radius: 40px;
+        }
+        .meta-item i {
+            width: 14px;
+            color: #3e8b75;
+        }
+        .invest-highlight {
+            background: #eef6f2;
+            color: #166b53;
+            font-weight: 600;
+        }
+        .section-block {
+            padding: 12px 18px;
+            border-bottom: 1px solid #f0f4f9;
+        }
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6c8b9b;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .desc-text {
+            font-size: 0.85rem;
+            line-height: 1.45;
+            color: #2a3b47;
+            word-break: break-word;
+        }
+        .coop-text {
+            font-size: 0.85rem;
+            line-height: 1.45;
+            background: #fafdff;
+            padding: 8px 12px;
+            border-radius: 20px;
+            color: #1f4e5c;
+            border-left: 3px solid #3dbb92;
+            margin-top: 4px;
+        }
+        .card-footer {
+            padding: 12px 18px 18px 18px;
+            background: #fefefe;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.7rem;
+            color: #597a8c;
+        }
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f4f9fc;
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            word-break: break-all;
+            max-width: 70%;
+        }
+        .contact-info i {
+            color: #2c8b70;
+        }
+        .validity-badge {
+            background: #fff1df;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            background: white;
+            border-radius: 32px;
+            color: #7a8f9c;
+        }
+        .footer-note {
+            text-align: center;
+            font-size: 0.65rem;
+            color: #7c93a3;
+            margin-top: 24px;
+            padding: 16px 0;
+            border-top: 1px solid #e2eaf0;
+        }
+        a, .clickable {
+            cursor: pointer;
+        }
+        i.fa, i.far, i.fas {
+            margin-right: 2px;
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <!-- 简洁头部 -->
+    <div class="hero-mini">
+        <h1>
+            <i class="fas fa-seedling"></i> 
+            2026左海产业生态大会
+        </h1>
+        <div class="sub">场景应用项目清单 · 开放合作 智汇左海</div>
+        <div class="keyword-cloud">
+            <span>⚡ 新能源</span>
+            <span>🤖 人工智能</span>
+            <span>🚢 港口与临港</span>
+            <span>🌊 海洋经济</span>
+            <span>📡 低空经济</span>
+            <span>🏭 智慧园区</span>
+        </div>
+    </div>
+
+    <!-- 筛选器 (简洁滑动) -->
+    <div class="filter-bar">
+        <div class="filter-buttons" id="filterGroup">
+            <div data-filter="all" class="filter-chip active"><i class="fas fa-list-ul"></i> 全部</div>
+            <div data-filter="新能源" class="filter-chip"><i class="fas fa-solar-panel"></i> 新能源</div>
+            <div data-filter="人工智能" class="filter-chip"><i class="fas fa-brain"></i> 人工智能</div>
+            <div data-filter="低空经济" class="filter-chip"><i class="fas fa-drone"></i> 低空经济</div>
+            <div data-filter="光伏" class="filter-chip"><i class="fas fa-sun"></i> 光伏</div>
+            <div data-filter="港口" class="filter-chip"><i class="fas fa-anchor"></i> 港口/海洋</div>
+            <div data-filter="海产品" class="filter-chip"><i class="fas fa-fish"></i> 海产品交易</div>
+            <div data-filter="智慧物业" class="filter-chip"><i class="fas fa-building"></i> 智慧物业</div>
+        </div>
+    </div>
+
+    <!-- 卡片容器 -->
+    <div id="cardsContainer" class="cards-list"></div>
+    <div class="footer-note">
+        <i class="fas fa-handshake"></i> 具体对接请联系各项目业主 · 数据基于2026左海大会发布
+    </div>
+</div>
+
+<script>
+    // ======================= 项目数据 (完全基于excel清单) =======================
+    const projectsData = [
+        {
+            id: 1,
+            name: "福州车网互动V2G智检充电基础设施项目",
+            industry: "新能源",
+            desc: "项目选址福州市域内，用地面积超1000平方米，总投资约1亿元，主要在机动车充电销售等领域上运用。拟投资新型电力系统，采用V2G技术+电池检测技术的充电基础设施，通过对13个公交场站和11个公共停车场新建或升级改造约562个充电车位，形成“公交枢纽充电+社会公共充电”互补的城市充电网络体系。目前正在陆续开展建设工作。",
+            cooperation: "在充电桩建设方面需求场地、资金合作",
+            district: "福州市域",
+            owner: "福州交通新能源科技有限公司",
+            investment: "0.5",
+            validityRaw: "2026-12-31 00:00:00",
+            filingUnit: "福州交通新能源科技有限公司",
+            contact: "规划发展部 徐佳琛<br>18850132219"
+        },
+        {
+            id: 2,
+            name: "中印尼“两国双园”片区智能化产业园",
+            industry: "智慧物业管理",
+            desc: "项目位于福清市城头镇,总投资0.03亿元，主要招引物业管理行业的企业，项目主要运营管理总建筑面积约7.5万平方米的物业,将打造中印尼“两国双园”片区内智能化产业园物业标杆项目，目前项目在立项阶段。",
+            cooperation: "寻找在物业管理行业的技术合作",
+            district: "福清市",
+            owner: "元洪两国双园（福建）控股集团有限公司",
+            investment: "0.03",
+            validityRaw: "46357",
+            filingUnit: "元洪两国双园（福建）控股集团有限公司",
+            contact: "丁晨曦<br>18659134069"
+        },
+        {
+            id: 3,
+            name: "两国双园·食创城产业园光伏项目",
+            industry: "光伏",
+            desc: "项目位于福清市城头镇,用地面积4.5万平方米,总投资0.1亿元，主要招引光伏行业的企业，在园区内各厂房布置屋面光伏发电装置,为企业生产用电提供支持，目前项目建设进度为立项阶段。",
+            cooperation: "寻找在光伏领域的技术合作",
+            district: "福清市",
+            owner: "元洪两国双园（福建）控股集团有限公司",
+            investment: "0.1",
+            validityRaw: "46357",
+            filingUnit: "元洪两国双园（福建）控股集团有限公司",
+            contact: "丁晨曦<br>18659134069"
+        },
+        {
+            id: 4,
+            name: "中印尼两国双园海洋装备制造产业园光伏项目",
+            industry: "光伏",
+            desc: "项目位于福清市城头镇,用地面积8.4万平方米,总投资0.2亿元，主要招引光伏行业的企业，在园区内各厂房布置屋面光伏发电装置,为企业生产用电提供支持，目前立项阶段。",
+            cooperation: "寻找在光伏领域的技术合作",
+            district: "福清市",
+            owner: "元洪两国双园（福建）控股集团有限公司",
+            investment: "0.2",
+            validityRaw: "46357",
+            filingUnit: "元洪两国双园（福建）控股集团有限公司",
+            contact: "丁晨曦<br>18659134069"
+        },
+        {
+            id: 5,
+            name: "AI安全管家平台（AI工程建设与结构运维安全管家）",
+            industry: "工程建设、人工智能",
+            desc: "项目位于福州市仓山区，依托左海集团工程建设场景，总投资0.1亿元，招引人工智能大模型合作方。在建筑工地安全智能监管场景下部署'云-边-端'协同架构，通过视觉识别与大模型深度融合，实现80余类安全隐患实时识别、风险定级与智能报告生成，打造'发现-分析-决策-处置-验证'全流程智能化闭环。目前已在锦翠公馆、双福高速落地。",
+            cooperation: "1. 行业大模型需求：共同开发工程建设安全垂直大模型；2. 应用场景需求：与房屋建筑、轨道交通等单位合作拓展AI巡检；3. 融资需求：引入战略投资0.05-0.1亿元用于算力扩容及推广。",
+            district: "仓山区",
+            owner: "福州市民卡有限公司",
+            investment: "0.1",
+            validityRaw: "46357",
+            filingUnit: "福州市民卡有限公司",
+            contact: "技术部 吴小斌<br>13706998142"
+        },
+        {
+            id: 6,
+            name: "高速智能巡检项目",
+            industry: "低空经济+道路养护",
+            desc: "我司有机场二级绕城高速、机场高速、长福高速等路段养护巡检任务约321公里，目前人工巡检，未来拟完善“路空双模”智能养护巡检：车载检测设备+无人机形成智慧巡查体系，覆盖日常路面、边坡、桥梁巡检及特殊应急管控。",
+            cooperation: "1.寻找低空经济技术合作；2.车载检测与无人机搭载AI视觉/激光雷达，结合北斗导航实现自主巡检，提升病害识别准确度。",
+            district: "仓山区",
+            owner: "福州交建高速公路养护有限公司",
+            investment: "按设备逐步增设无人机",
+            validityRaw: "46357",
+            filingUnit: "福州交建高速公路养护有限公司",
+            contact: "养护信息中心经理<br>13705079497"
+        },
+        {
+            id: 7,
+            name: "福建罗源牛坑湾港口及加工物流区填海工程",
+            industry: "低空经济、新能源、新材料、人工智能、未来产业",
+            desc: "位于罗源县碧里乡，总投资64.3亿元，竣工后形成陆域720公顷，规划9个5-20万吨级通用泊位码头，集港口装卸、仓储物流、临港加工于一体。聚焦新材料、新能源、海工装备，采用“3+4+3”模式打造临港产业体系。目前陆域形成建设期。",
+            cooperation: "寻找新能源整车、船舶建造、海工装备等企业合作",
+            district: "罗源县",
+            owner: "福建罗源湾鲁能海港有限公司",
+            investment: "64.3",
+            validityRaw: "长期有效",
+            filingUnit: "福建罗源湾鲁能海港有限公司",
+            contact: "尤碧霞 15205066506<br>沈惠飞 18695701000"
+        },
+        {
+            id: 8,
+            name: "福州安住发展有限公司（U厝公寓）",
+            industry: "长租公寓运营",
+            desc: "专业长租公寓运营公司，运营U厝公寓超55万㎡，总投资82亿元。包含5个集中式公寓及100多个小区超10000间分散式公寓，多元户型，通过“房东直租”、智能运营，提供有温度的居住服务。",
+            cooperation: "1.寻求城区内存量住宅资产合作盘活；2.为企业量身打造员工公寓，实现产城人融合。",
+            district: "晋安区",
+            owner: "福州安住发展有限公司",
+            investment: "近100亿元",
+            validityRaw: "2026年3月起 有效",
+            filingUnit: "福州安住发展有限公司",
+            contact: "品牌运营部 万芳<br>18650756707"
+        },
+        {
+            id: 9,
+            name: "东盟海产品交易所有限公司",
+            industry: "海产品交易所",
+            desc: "中国—东盟海上合作基金首批重点项目，全国首个海产品交易大宗现货平台，服务“一带一路”。整合交易、仓储、物流、金融等全产业链，协议/竞拍/集采模式，截至2026年3月入驻交易商超300家，交易额突破30亿元。",
+            cooperation: "1.招募水产育种、养殖、加工、贸易企业入驻成为会员；2.寻找滞压货源竞拍合作；3.水产品价值评估、货权监管合作；4.提供仓储物流、报关等第三方服务对接；5.为会员对接银行、供应链金融。",
+            district: "马尾区",
+            owner: "东盟海产品交易所有限公司",
+            investment: "待定",
+            validityRaw: "长期有效",
+            filingUnit: "东盟海产品交易所有限公司",
+            contact: "联系人：张成"
+        },
+        {
+            id: 10,
+            name: "福州左海置地有限公司",
+            industry: "新媒体、AI、新一代信息技术",
+            desc: "左海置地秉承“城市生活服务商”目标，背靠左海集团与工业园区集团，以客户需求为核心构建“好房子”标准，持续落地“左海好生活”。",
+            cooperation: "1.多业态合作，“左海好生活”小程序嫁接多业态共创；2.寻求新媒体传播、AI信息技术、VR/沙盘、工法墙、展厅、环保物料、绿色食品等产业合作，赋能营销及业主服务。",
+            district: "晋安区",
+            owner: "福州左海置地有限公司",
+            investment: "近200亿元",
+            validityRaw: "长期有效",
+            filingUnit: "福州左海置地有限公司",
+            contact: "福州左海置地有限公司"
+        }
+    ];
+
+    // 辅助: 格式化投资额
+    function formatInvestment(val) {
+        if (!val || val === "") return "—";
+        let str = val.toString();
+        if (str.includes("近") || str.includes("待定") || str.includes("按设备")) {
+            return `<span class="meta-item invest-highlight"><i class="fas fa-coins"></i> ${str}</span>`;
+        }
+        let num = parseFloat(str);
+        if (!isNaN(num)) {
+            return `<span class="meta-item invest-highlight"><i class="fas fa-chart-line"></i> ${num} 亿元</span>`;
+        }
+        return `<span class="meta-item">${str}</span>`;
+    }
+
+    // 有效期转换 (兼容excel序列号以及日期文本)
+    function formatValidity(raw) {
+        if (!raw) return "待定";
+        let str = raw.toString().trim();
+        if (str === "长期有效") return `<span class="validity-badge"><i class="far fa-calendar-check"></i> 长期有效</span>`;
+        if (str.includes("有效")) return `<span class="validity-badge"><i class="far fa-calendar-alt"></i> ${str}</span>`;
+        if (str === "46357") return `<span class="validity-badge"><i class="far fa-calendar-alt"></i> 2026年12月</span>`;
+        if (str.includes("-") && str.includes(":")) {
+            let datePart = str.split(' ')[0];
+            return `<span class="validity-badge"><i class="far fa-calendar-alt"></i> ${datePart}</span>`;
+        }
+        if (str.match(/\d{4}-\d{2}-\d{2}/)) {
+            return `<span class="validity-badge"><i class="far fa-calendar-alt"></i> ${str}</span>`;
+        }
+        return `<span class="validity-badge">${str}</span>`;
+    }
+
+    // 提取行业简短显示（卡片头部使用）
+    function getIndustryShort(industryStr) {
+        if (!industryStr) return "其他";
+        let main = industryStr.split(/[,，、]/)[0];
+        if (main.length > 14) main = main.slice(0,12)+"..";
+        return main;
+    }
+
+    // 检查项目是否符合筛选条件 (基于行业领域关键词)
+    function matchFilter(project, filterKey) {
+        if (filterKey === "all") return true;
+        const industry = (project.industry || "").toLowerCase();
+        const name = (project.name || "").toLowerCase();
+        const cooperation = (project.cooperation || "").toLowerCase();
+        // 根据筛选标签智能匹配
+        if (filterKey === "新能源") {
+            return industry.includes("新能源") || industry.includes("光伏") || name.includes("v2g") || name.includes("充电");
+        }
+        if (filterKey === "人工智能") {
+            return industry.includes("人工智能") || industry.includes("ai") || name.includes("ai") || industry.includes("数字化") || project.name.includes("AI");
+        }
+        if (filterKey === "低空经济") {
+            return industry.includes("低空经济") || name.includes("巡检") || project.desc.includes("无人机");
+        }
+        if (filterKey === "光伏") {
+            return industry.includes("光伏") || name.includes("光伏");
+        }
+        if (filterKey === "港口") {
+            return industry.includes("港口") || industry.includes("临港") || name.includes("港口") || name.includes("填海") || industry.includes("海洋经济");
+        }
+        if (filterKey === "海产品") {
+            return industry.includes("海产品") || name.includes("海产品") || name.includes("东盟海产品");
+        }
+        if (filterKey === "智慧物业") {
+            return industry.includes("智慧物业") || industry.includes("物业管理") || project.name.includes("产业园");
+        }
+        // 默认包含匹配
+        return industry.includes(filterKey.toLowerCase());
+    }
+
+    // 渲染卡片列表
+    function renderCards(filter = "all") {
+        const container = document.getElementById("cardsContainer");
+        if (!container) return;
+        const filtered = projectsData.filter(proj => matchFilter(proj, filter));
+        if (filtered.length === 0) {
+            container.innerHTML = `<div class="empty-state"><i class="fas fa-filter" style="font-size: 2rem; opacity: 0.5;"></i><p style="margin-top:12px">暂无匹配项目，试试其他筛选条件</p></div>`;
+            return;
+        }
+
+        let cardsHtml = "";
+        filtered.forEach(proj => {
+            // 行业标签显示主领域
+            const industryTag = getIndustryShort(proj.industry);
+            const investHtml = formatInvestment(proj.investment);
+            const validityHtml = formatValidity(proj.validityRaw);
+            // 合作需求保留换行
+            const cooperationHtml = proj.cooperation.replace(/\n/g, '<br>');
+            const contactHtml = proj.contact.replace(/\n/g, '<br>');
+            
+            cardsHtml += `
+                <div class="project-card">
+                    <div class="card-header">
+                        <div class="project-title">${proj.name}</div>
+                        <div class="industry-tag"><i class="fas fa-hashtag"></i> ${industryTag}</div>
+                    </div>
+                    <div class="card-meta">
+                        <span class="meta-item"><i class="fas fa-map-marker-alt"></i> ${proj.district}</span>
+                        ${investHtml}
+                        <span class="meta-item"><i class="fas fa-building"></i> ${proj.owner.length > 20 ? proj.owner.slice(0,18)+".." : proj.owner}</span>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label"><i class="fas fa-align-left"></i> 场景描述</div>
+                        <div class="desc-text">${proj.desc}</div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label"><i class="fas fa-handshake"></i> 合作需求</div>
+                        <div class="coop-text">${cooperationHtml}</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="contact-info">
+                            <i class="fas fa-phone-alt"></i> ${contactHtml}
+                        </div>
+                        ${validityHtml}
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = cardsHtml;
+    }
+
+    // 初始化筛选按钮事件
+    function initFilters() {
+        const filters = document.querySelectorAll("[data-filter]");
+        filters.forEach(btn => {
+            btn.addEventListener("click", function(e) {
+                const filterVal = this.getAttribute("data-filter");
+                // 更新激活样式
+                filters.forEach(b => b.classList.remove("active"));
+                this.classList.add("active");
+                renderCards(filterVal);
+            });
+        });
+    }
+
+    // 页面加载渲染全部
+    renderCards("all");
+    initFilters();
+</script>
+</body>
+</html>
