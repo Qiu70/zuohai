@@ -26,7 +26,6 @@
             background-repeat: no-repeat;
             z-index: -2;
         }
-        /* 备用纯色背景，图片加载时显示 */
         body {
             background-color: #2a0a4a;
             font-family: 'Inter', sans-serif;
@@ -42,10 +41,9 @@
             position: relative;
             z-index: 1;
         }
-        /* 头部：上移标题（减小 margin-top） */
         .hero {
             text-align: center;
-            margin-top: 60px;               /* 从120px减小到60px，标题上移 */
+            margin-top: 60px;
             margin-bottom: 24px;
             padding: 20px 16px;
             background: rgba(0,0,0,0.35);
@@ -67,7 +65,6 @@
             opacity: 0.9;
             color: #f0e6ff;
         }
-        /* 三大方框入口 */
         .entry-grid {
             display: flex;
             flex-direction: column;
@@ -116,7 +113,6 @@
             font-size: 0.75rem;
             color: #4a3768;
         }
-        /* 模块内容区域 */
         .module-content {
             display: none;
         }
@@ -144,7 +140,6 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: 0.1s;
         }
         .back-btn:active {
             background: rgba(255,255,255,0.4);
@@ -155,7 +150,6 @@
             color: white;
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
-        /* 筛选栏 */
         .filter-scroll {
             overflow-x: auto;
             white-space: nowrap;
@@ -186,7 +180,6 @@
             border-color: #c29eff;
             color: white;
         }
-        /* 卡片列表 - 毛玻璃效果 */
         .cards-list {
             display: flex;
             flex-direction: column;
@@ -373,17 +366,13 @@
     </style>
 </head>
 <body>
-<!-- 独立固定背景层，解决移动端背景变化问题 -->
 <div class="bg-fixed"></div>
-
 <div class="app-container">
-    <!-- 头部：标题上移 -->
     <div class="hero">
         <h1>2026左海产业生态大会</h1>
         <div class="sub">场景项目 · 支持政策 · 采购计划 · 全链赋能</div>
     </div>
 
-    <!-- 三大方框入口 -->
     <div id="entryPanel" class="entry-grid">
         <div class="entry-card" data-module="scenario">
             <div class="entry-icon"><i class="fas fa-cubes"></i></div>
@@ -411,13 +400,11 @@
         </div>
     </div>
 
-    <!-- 模块内容区域（初始隐藏） -->
     <div id="moduleContainer" style="display: none;">
         <div class="module-header">
             <div class="back-btn" id="backHomeBtn"><i class="fas fa-arrow-left"></i> 返回首页</div>
             <div class="module-title" id="moduleTitle"></div>
         </div>
-        <!-- 场景筛选栏 -->
         <div id="scenarioFilterArea" style="display: none;">
             <div class="filter-scroll">
                 <div class="filter-group" id="scenarioFilterGroup">
@@ -432,7 +419,6 @@
                 </div>
             </div>
         </div>
-        <!-- 政策筛选栏 -->
         <div id="policyFilterArea" style="display: none;">
             <div class="filter-scroll">
                 <div class="filter-group" id="policyFilterGroup">
@@ -457,7 +443,7 @@
 </div>
 
 <script>
-    // ======================= 场景项目数据（10条） =======================
+    // ======================= 场景项目数据（10条，完整） =======================
     const projectsData = [
         { id:1, name:"福州车网互动V2G智检充电基础设施项目", industry:"新能源", desc:"项目选址福州市域内，用地面积超1000平方米，总投资约1亿元，采用V2G技术+电池检测技术的充电基础设施，通过对13个公交场站和11个公共停车场新建或升级改造约562个充电车位，形成“公交枢纽充电+社会公共充电”互补的城市充电网络体系。", cooperation:"在充电桩建设方面需求场地、资金合作", district:"福州市域", owner:"福州交通新能源科技有限公司", investment:"0.5", validityRaw:"2026-12-31", contact:"规划发展部 徐佳琛 18850132219" },
         { id:2, name:"中印尼“两国双园”片区智能化产业园", industry:"智慧物业管理", desc:"项目位于福清市城头镇,总投资0.03亿元，主要招引物业管理行业的企业，项目主要运营管理总建筑面积约7.5万平方米的物业,将打造中印尼“两国双园”片区内智能化产业园物业标杆项目，目前项目在立项阶段。", cooperation:"寻找在物业管理行业的技术合作", district:"福清市", owner:"元洪两国双园（福建）控股集团有限公司", investment:"0.03", validityRaw:"2026年12月", contact:"丁晨曦 18659134069" },
@@ -471,36 +457,159 @@
         { id:10, name:"福州左海置地有限公司", industry:"新媒体、AI", desc:"城市生活服务商，构建“好房子”标准，落地“左海好生活”。", cooperation:"多业态合作，新媒体、AI、VR、展厅、绿色食品等赋能。", district:"晋安区", owner:"福州左海置地有限公司", investment:"近200亿元", validityRaw:"长期有效", contact:"福州左海置地有限公司" }
     ];
 
-    // ======================= 政策数据（完整类别） =======================
+    // ======================= 配套支持政策（完整版，共约85条） =======================
     const policiesRaw = [
-        { category:"人才支持与服务保障", content:"入园企业员工租房享受优惠90%；毕业两年内享学生折扣95%。", applicable:"加入左海生态联盟企业", owner:"工业园区集团" },
-        { category:"人才支持与服务保障", content:"人才购房补贴（博士最高50万元、硕士最高30万元、本科最高15万元）。", applicable:"符合人才认定标准", owner:"左海集团" },
-        { category:"人才支持与服务保障", content:"物业、安保、礼仪、保洁等服务。", applicable:"入园企业", owner:"置业集团" },
-        { category:"产业升级与科技创新", content:"新认定市级创新联合体最高补助500万元；国家、省科技重大专项配套最高500万元。", applicable:"落地园区", owner:"工业园区集团" },
-        { category:"产业升级与科技创新", content:"产学研联合项目补助最高50万元。", applicable:"产学研合作", owner:"交建集团" },
-        { category:"出海服务与对外开放", content:"印尼进出口集装箱重箱奖励300元/箱，最高500万元。", applicable:"落地示范园区", owner:"两国双园集团" },
-        { category:"出海服务与对外开放", content:"新开通印尼航线奖励200万元/条。", applicable:"船运公司", owner:"两国双园集团" },
+        // 人才支持与服务保障 (11条)
+        { category:"人才支持与服务保障", content:"入园企业员工租房享受优惠90%；毕业两年内享学生折扣95%。", applicable:"加入左海生态联盟企业、左海体系供应商、海交所注册企业、园区企业、符合人才认定标准", owner:"工业园区集团（U厝公寓）、置业集团等" },
+        { category:"人才支持与服务保障", content:"学生95折优惠、新项目享首年开业折扣、企业客户享受租房折扣。", applicable:"左海生态联盟企业、园区企业", owner:"工业园区集团（U厝公寓）" },
+        { category:"人才支持与服务保障", content:"人才购房补贴（博士最高50万元、硕士最高30万元、本科最高15万元）。", applicable:"符合福州市人才认定标准", owner:"左海集团、置业板块" },
+        { category:"人才支持与服务保障", content:"物业、安保、礼仪、保洁等服务。", applicable:"入园企业、左海生态联盟", owner:"置业集团物业板块" },
+        { category:"人才支持与服务保障", content:"团建+培训组合套餐、会展、文旅、企业内训等。", applicable:"联盟企业、园区企业", owner:"置业集团、运通集团" },
+        { category:"人才支持与服务保障", content:"车辆租赁及维修服务。", applicable:"左海体系企业", owner:"运通集团" },
+        { category:"人才支持与服务保障", content:"出租车顶灯广告服务。", applicable:"合作企业", owner:"公交集团、运通集团" },
+        { category:"人才支持与服务保障", content:"充电服务费优惠20%。", applicable:"生态联盟企业", owner:"新能源科技公司" },
+        { category:"人才支持与服务保障", content:"定制公交、车辆租赁、物流配送、车辆检测、维修保养服务。", applicable:"园区入驻企业", owner:"公交集团、运通集团" },
+        { category:"人才支持与服务保障", content:"食堂承包、食材配送、光伏材料供应、管道清淤、空调销售、办公用品供应等。", applicable:"左海体系企业", owner:"工业园区集团、置业集团" },
+        { category:"人才支持与服务保障", content:"引进培育中印尼经贸人才，提供人才服务绿色通道。", applicable:"两国双园示范园区企业", owner:"两国双园集团" },
+        // 产业升级与科技创新 (13条)
+        { category:"产业升级与科技创新", content:"新认定市级创新联合体最高补助500万元；国家、省科技重大专项配套最高500万元。", applicable:"落地园区、符合申报条件", owner:"工业园区集团产业板块" },
+        { category:"产业升级与科技创新", content:"产学研联合项目补助最高50万元。", applicable:"园区企业、产学研合作", owner:"交建集团、市民卡公司" },
+        { category:"产业升级与科技创新", content:"国家级创新平台奖励500万元。", applicable:"获得国家级认定", owner:"工业园区集团" },
+        { category:"产业升级与科技创新", content:"购买高校院所技术成果补助最高200万元。", applicable:"技术合同登记", owner:"两国双园集团" },
+        { category:"产业升级与科技创新", content:"代建、监理、检测、勘察设计、施工、养护等服务。", applicable:"基础设施项目", owner:"交建集团" },
+        { category:"产业升级与科技创新", content:"资产运营、工程管理、物业管理、市政环卫、餐饮服务。", applicable:"左海产业载体", owner:"置业集团" },
+        { category:"产业升级与科技创新", content:"AI安全管家平台合作开发与应用。", applicable:"工程建设单位、园区", owner:"市民卡公司" },
+        { category:"产业升级与科技创新", content:"信息化系统开发、集成、运营服务。", applicable:"数字化需求企业", owner:"市民卡公司" },
+        { category:"产业升级与科技创新", content:"印尼进口冷链仓储奖励0.6元/天/吨，最高100万元。", applicable:"使用元洪区公共冷链设施", owner:"两国双园集团" },
+        { category:"产业升级与科技创新", content:"新增水产精深加工生产线补助30%，最高500万元；冷库改造补助最高300万元。", applicable:"落地示范园区", owner:"两国双园集团" },
+        { category:"产业升级与科技创新", content:"技改项目追加补助10%。", applicable:"获得市级技改补助", owner:"工业园区集团" },
+        { category:"产业升级与科技创新", content:"国家知识产权优势企业奖励10万元，示范企业通过复核奖励5万元。", applicable:"示范园区企业", owner:"两国双园集团" },
+        { category:"产业升级与科技创新", content:"标准化技术平台建设。", applicable:"中印尼标准化合作", owner:"两国双园集团" },
+        // 出海服务与对外开放 (7条)
+        { category:"出海服务与对外开放", content:"印尼进出口集装箱重箱奖励300元/箱，最高500万元。", applicable:"落地示范园区、经由福州港口", owner:"两国双园集团" },
+        { category:"出海服务与对外开放", content:"陆运至元洪区集装箱奖励100~200元/箱，最高300万元。", applicable:"从事中印尼进出口业务", owner:"两国双园集团" },
+        { category:"出海服务与对外开放", content:"印尼产品申请清真认证、流通许可奖励2万元/项。", applicable:"产品出口印尼", owner:"两国双园集团" },
+        { category:"出海服务与对外开放", content:"境外参展补助追加至100%，单场最高5万元，年最高20万元。", applicable:"有进出口实绩", owner:"两国双园集团" },
+        { category:"出海服务与对外开放", content:"新开通印尼航线奖励200万元/条。", applicable:"船运公司开通航线", owner:"两国双园集团" },
+        { category:"出海服务与对外开放", content:"申办APEC商务旅行卡便利。", applicable:"示范园区企业", owner:"两国双园集团" },
+        { category:"出海服务与对外开放", content:"支持农业企业与印尼合作，优先扶持。", applicable:"农业合作项目", owner:"两国双园集团" },
+        // 金融服务与基金投资 (9条)
         { category:"金融服务与基金投资", content:"融资租赁服务（售后回租、直租）。", applicable:"符合融资条件", owner:"左海融资租赁" },
+        { category:"金融服务与基金投资", content:"对接银行、担保、供应链金融等服务。", applicable:"海交所会员、园区企业", owner:"东盟海交所、两国双园" },
+        { category:"金融服务与基金投资", content:"出口信用保险补助30%，三级合计不超75%，年最高20万元。", applicable:"有出口实绩", owner:"两国双园集团" },
+        { category:"金融服务与基金投资", content:"外商投资企业实际到资奖励2%，最高1000万元。", applicable:"实际到资500万美元以上", owner:"两国双园集团" },
+        { category:"金融服务与基金投资", content:"跨境贷融资支持。", applicable:"中印尼跨境贸易", owner:"两国双园集团" },
+        { category:"金融服务与基金投资", content:"低利率融资、再贷款再贴现支持。", applicable:"符合银行信贷条件", owner:"左海集团合作金融机构" },
+        { category:"金融服务与基金投资", content:"跨境人民币结算便利化。", applicable:"跨境人民币需求", owner:"两国双园集团" },
+        { category:"金融服务与基金投资", content:"企业上市奖励（省级奖励转奖）。", applicable:"成功上市企业", owner:"两国双园集团" },
+        { category:"金融服务与基金投资", content:"产业合作基金投资。", applicable:"重点产业、中印尼合作", owner:"左海产业基金" },
+        // 订单开放与供应链提质 (8条)
         { category:"订单开放与供应链提质", content:"纳入供应链优质合作企业白名单，定制化供应链服务。", applicable:"加入左海生态联盟", owner:"左海供应链集团" },
+        { category:"订单开放与供应链提质", content:"推荐采销合作企业。", applicable:"联盟企业", owner:"左海供应链集团" },
+        { category:"订单开放与供应链提质", content:"签订战略合作协议，优先享受采供销一体化服务。", applicable:"生态联盟成员", owner:"左海建投公司" },
+        { category:"订单开放与供应链提质", content:"大宗商品、食品等贸易和供应链服务。", applicable:"园区企业", owner:"两国双园集团" },
+        { category:"订单开放与供应链提质", content:"地下综合管廊、写字楼租赁、松下港区合作、加油站运营管理。", applicable:"基础设施合作", owner:"左海建投、工业园区" },
+        { category:"订单开放与供应链提质", content:"油品销售与供应链保障。", applicable:"合作企业", owner:"新能源科技" },
+        { category:"订单开放与供应链提质", content:"年货、慰问品、工会福利等物资集采供应。", applicable:"左海体系单位", owner:"供应链集团" },
+        { category:"订单开放与供应链提质", content:"为会员企业提供涵盖水产品链溯源、货权监管、海外代采、竞拍、价值评估、价格跟踪及质押处置的全链条综合服务。", applicable:"海交所会员", owner:"东盟海交所" },
+        // 政务与营商环境支持 (7条)
         { category:"政务与营商环境支持", content:"海交所会员2026年交易手续费全免，增值服务费减半。", applicable:"海交所注册会员", owner:"东盟海交所" },
-        { category:"其他政策", content:"购买办公产品、厂房、研办楼享受折扣（最高1900元/㎡优惠）。", applicable:"入园企业", owner:"工业园区集团" },
-        { category:"两国双园专项", content:"对从印尼进口到元洪的集装箱货主企业，每重箱奖励300元，单家年度最高500万元。", applicable:"落地示范园区", owner:"两国双园集团" }
+        { category:"政务与营商环境支持", content:"新注册中印尼经贸企业前2年地方经济贡献100%奖励，后3年50%奖励。", applicable:"实质性从事中印尼经贸", owner:"两国双园集团" },
+        { category:"政务与营商环境支持", content:"环评审批正面清单、告知承诺制。", applicable:"符合正面清单", owner:"生态环境部门" },
+        { category:"政务与营商环境支持", content:"“项目管家”税收服务。", applicable:"示范园区企业", owner:"税务部门" },
+        { category:"政务与营商环境支持", content:"通关服务平台纳入省“单一窗口”。", applicable:"进出口企业", owner:"商务部门" },
+        { category:"政务与营商环境支持", content:"社会化招商机构优先申请省级招商奖励。", applicable:"引荐项目落地", owner:"招商部门" },
+        { category:"政务与营商环境支持", content:"重大项目“一企一议”政策。", applicable:"重大优质项目", owner:"左海集团/福清市" },
+        // 其他政策 (9条)
+        { category:"其他政策", content:"入区企业享受税收、贸易管制、保税监管、外汇政策。", applicable:"入区企业", owner:"空港综保、工业园区" },
+        { category:"其他政策", content:"多子女购房补贴（二孩1%最高3万，三孩1.5%最高5万）。", applicable:"福州五城区购房", owner:"置业板块" },
+        { category:"其他政策", content:"住房公积金贷款额度提升、装修/车位提取、代际互助。", applicable:"左海产业载体购房", owner:"公积金中心" },
+        { category:"其他政策", content:"契税全额补贴（阶段性）。", applicable:"左海项目购房", owner:"置业集团" },
+        { category:"其他政策", content:"商业贷款利率优惠（首套3.0%、二套3.6%）。", applicable:"合作银行", owner:"金融合作机构" },
+        { category:"其他政策", content:"购买办公产品、厂房、研办楼享受折扣（最高1900元/㎡优惠、95折、9折等）。", applicable:"入园企业", owner:"工业园区集团" },
+        { category:"其他政策", content:"租赁厂房享免租期。", applicable:"左海产业载体", owner:"工业园区集团" },
+        { category:"其他政策", content:"公交车广告位优惠。", applicable:"合作企业", owner:"公交集团" },
+        { category:"其他政策", content:"购买两国双园食创城项目厂房最高96折，可按需定制。", applicable:"入驻两国双园片区", owner:"两国双园集团" },
+        // 两国双园专项 (新增多条，基于政策案例)
+        { category:"两国双园专项", content:"对从印尼进口到元洪或从元洪出口到印尼的集装箱货主企业，每重箱奖励300元，单家年度最高500万元。", applicable:"落地示范园区、经由福州港口运输", owner:"两国双园集团" },
+        { category:"两国双园专项", content:"陆运至元洪区集装箱重箱奖励100-200元/箱，单家最高300万元。", applicable:"从事中印尼进出口业务", owner:"两国双园集团" },
+        { category:"两国双园专项", content:"印尼进口货物存储在元洪公共冷链设施，按0.6元/天/吨奖励，最高100万元。", applicable:"使用元洪区公共冷链", owner:"两国双园集团" },
+        { category:"两国双园专项", content:"园区产品申请印尼清真认证/流通许可，每项奖励2万元。", applicable:"产品出口印尼", owner:"两国双园集团" },
+        { category:"两国双园专项", content:"新开通元洪至印尼集装箱航线且年运行≥24航次，奖励船运公司200万元。", applicable:"航线运营方", owner:"两国双园集团" },
+        { category:"两国双园专项", content:"支持示范园区企业享受跨境贷、出口信保补助30%，三级合计最高75%。", applicable:"有出口实绩", owner:"两国双园集团" },
+        { category:"两国双园专项", content:"新注册中印尼经贸企业前2年地方经济贡献100%奖励，后3年50%。", applicable:"示范园区新企业", owner:"两国双园集团" },
+        { category:"两国双园专项", content:"外商投资实际到资500万美元以上按2%奖励，最高1000万元。", applicable:"外资企业", owner:"两国双园集团" },
+        { category:"两国双园专项", content:"水产精深加工生产线新增投资超100万元补助30%，最高500万元；冷库改造最高300万元。", applicable:"园区水产品企业", owner:"两国双园集团" },
+        { category:"两国双园专项", content:"示范园区工业企业技改追加补助10%。", applicable:"获得市级技改补助", owner:"两国双园集团" },
+        { category:"两国双园专项", content:"国家知识产权优势企业奖励10万元，示范企业通过复核奖励5万元。", applicable:"园区内企业", owner:"两国双园集团" },
+        { category:"两国双园专项", content:"支持中印尼跨境贸易企业申请“跨境贷”，政策性银行低利率融资。", applicable:"中印尼跨境贸易", owner:"两国双园集团" }
     ];
 
-    // ======================= 采购清单数据（完整示例） =======================
+    // ======================= 采购计划清单（完整63条） =======================
     const procurementData = [
-        { seq:1, company:"福州工业园区开发集团有限公司", name:"水泥砖项目采购", content:"年度集采水泥砖", amount:1050, time:"46174", contact:"谢祥经理", category:"供应链类" },
-        { seq:2, company:"福州工业园区开发集团有限公司", name:"集装箱房及配件采购", content:"集装箱房采购安装", amount:700, time:"46174", contact:"谢祥经理", category:"供应链类" },
-        { seq:3, company:"福州工业园区开发集团有限公司", name:"存量房改保租房橱柜采购", content:"橱柜采购", amount:400, time:"46174", contact:"谢祥经理", category:"供应链类" },
-        { seq:4, company:"福州工业园区开发集团有限公司", name:"集采项目钢筋2026.6-12", content:"钢筋采购", amount:4000, time:"46174", contact:"谢祥经理", category:"供应链类" },
-        { seq:5, company:"福州工业园区开发集团有限公司", name:"义序工业园区混凝土招标", content:"混凝土", amount:2000, time:"46143", contact:"谢祥经理", category:"供应链类" },
-        { seq:6, company:"福州工业园区开发集团有限公司", name:"2026年度建筑垃圾运输分包", content:"垃圾运输", amount:715, time:"46143", contact:"谢成兰", category:"载体类" },
-        { seq:7, company:"福州工业园区开发集团有限公司", name:"马尾海洋精工产业园制冷系统", content:"制冷设备", amount:1000, time:"46143", contact:"吴云魁", category:"载体类" },
-        { seq:8, company:"福州左海置地有限公司", name:"其余开发项目管桩", content:"管桩采购", amount:10000, time:"2026年4-12月", contact:"黄秀琴", category:"供应链类" },
-        { seq:9, company:"福州安住发展有限公司", name:"2026年度新媒体运营", content:"新媒体运营", amount:48, time:"46143", contact:"万芳", category:"配套服务类" },
-        { seq:10, company:"福州市园开新筑有限公司", name:"义序vr沙盘招标", content:"VR沙盘", amount:45, time:"46143", contact:"吴宇轩", category:"配套服务类" },
-        { seq:11, company:"福州工业园区开发集团有限公司", name:"江湾道幕墙工程", content:"幕墙工程", amount:3200, time:"46143", contact:"肖敏", category:"载体类" },
-        { seq:12, company:"元洪两国双园集团", name:"两国双园食品产业园分布式光伏", content:"光伏投建营", amount:1000, time:"46174", contact:"丁晨曦", category:"载体类" }
+        { seq:1, company:"福州工业园区开发集团有限公司", name:"水泥砖项目采购", content:"年度集采项目水泥砖及烧结砖采购供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:1050, time:"46174", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:2, company:"福州工业园区开发集团有限公司", name:"集装箱房及配件采购安装、拆装及维修项目", content:"年度集采项目集装箱房及配件采购安装、拆装及维修项目，供货范围：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:700, time:"46174", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:3, company:"福州工业园区开发集团有限公司", name:"存量房改保租房装饰装修工程项目-四批次橱柜采购招标", content:"存量房改保租房装饰装修工程项目-四批次橱柜采购招标，供货范围：福州市仓山区、晋安区，涉及35个小区，共681套房源，合作方式：甲供材料", amount:400, time:"46174", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:4, company:"福州工业园区开发集团有限公司", name:"存量房改保租房装饰装修工程项目-四批次木门采购招标", content:"存量房改保租房装饰装修工程项目-四批次木门采购招标，供货范围：福州市仓山区、晋安区，涉及35个小区，共681套房源，合作方式：甲供材料", amount:400, time:"46174", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:5, company:"福州工业园区开发集团有限公司", name:"存量房改保租房装饰装修工程项目-四批次铝合金门采购招标", content:"存量房改保租房装饰装修工程项目-四批次铝合金门采购招标，供货范围：福州市仓山区、晋安区，涉及35个小区，共681套房源，合作方式：甲供材料", amount:700, time:"46175", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:6, company:"福州工业园区开发集团有限公司", name:"存量房改保租房装饰装修工程项目-四批次SPC石塑地板采购招标", content:"存量房改保租房装饰装修工程项目-四批次SPC石塑地板采购招标，供货范围：福州市仓山区、晋安区，涉及35个小区，共681套房源，合作方式：甲供材料", amount:1000, time:"46145", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:7, company:"福州工业园区开发集团有限公司", name:"存量房改保租房装饰装修工程项目-四批次瓷砖采购招标", content:"存量房改保租房装饰装修工程项目-四批次瓷砖采购招标，供货范围：福州市仓山区、晋安区，涉及35个小区，共681套房源，合作方式：甲供材料", amount:700, time:"46146", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:8, company:"福州工业园区开发集团有限公司", name:"存量房改保租房装饰装修工程项目-四批次家具采购招标", content:"存量房改保租房装饰装修工程项目-四批次家具采购招标，供货范围：福州市仓山区、晋安区，涉及35个小区，共681套房源，合作方式：甲供材料", amount:3500, time:"46204", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:9, company:"福州工业园区开发集团有限公司", name:"集采项目钢筋2026.6-12", content:"年度集采项目钢筋采购供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:4000, time:"46174", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:10, company:"福州工业园区开发集团有限公司", name:"义序工业园区一期D地块（施工）混凝土招标", content:"预计供应商品混凝土数量（m3）71350.00m3供货地址：福州市仓山义序工业园区一期D地块", amount:2000, time:"46143", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:11, company:"福州工业园区开发集团有限公司", name:"其余开发新项目混凝土", content:"福州五区八县预估量300000 m3", amount:8000, time:"46296", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:12, company:"福州工业园区开发集团有限公司", name:"集采项目水泥2026.6-2026.12", content:"年度集采项目水泥采购供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:1400, time:"46174", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:13, company:"福州工业园区开发集团有限公司", name:"半年度零星材料集中采购项目", content:"半年度集采项目零星材料采购供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:460, time:"46174", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:14, company:"福州工业园区开发集团有限公司", name:"2026年5月-2027年5月普通蒸压加气混凝土砌块集中采购", content:"半年度集采项目普通加气块采购供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:1163, time:"46143", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:15, company:"福州工业园区开发集团有限公司", name:"2026年度福州工业园区开发集团有限公司集采项目办公室家具采购", content:"年度集采项目办公家具供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:170, time:"46143", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:16, company:"福州工业园区开发集团有限公司", name:"2026年8月-2027年8月挤塑板（蓝板）集中采购", content:"年度集采项目挤塑板蓝板供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:150, time:"46235", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:17, company:"福州园开实业有限公司", name:"福州园开实业有限公司2026年6月至2027年6月定型化栏杆集中采购", content:"年度集采项目定型化栏杆供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:155, time:"46143", contact:"肖标华13799980524", category:"供应链类" },
+        { seq:18, company:"福州工业园区开发集团有限公司", name:"2026年9月-2027年2月钢筋网片集中采购项目", content:"年度集采项目钢筋网片供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:150, time:"46266", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:19, company:"福州工业园区开发集团有限公司", name:"2026年度景观项目零星材料集中采购", content:"年度集采项目零星材料供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:560, time:"46143", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:20, company:"福州工业园区开发集团有限公司", name:"2026年度数字式汽车衡集中采购", content:"年度集采项目数字汽车衡供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:200, time:"46143", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:21, company:"福州工业园区开发集团有限公司", name:"2026年度福州工业园区开发集团有限公司集采项目实名制通道采购安装", content:"年度集采项目实名制通道供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:245, time:"46143", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:22, company:"福州工业园区开发集团有限公司", name:"集采项目2026年度临时用电-铜芯、铝芯电线电缆采购", content:"年度集采项目铜芯、铝芯电线电缆供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:200, time:"46235", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:23, company:"福州工业园区开发集团有限公司", name:"2026年度地磅收料系统硬件集采", content:"年度集采项目地磅供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:120, time:"46143", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:24, company:"福州工业园区开发集团有限公司", name:"2026年度扬尘监控采购安装集中采购", content:"年度集采项目扬尘检测供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:125, time:"46143", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:25, company:"福州工业园区开发集团有限公司", name:"2026年度成品保护材料集中采购", content:"年度集采项目成品保护材料供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:50, time:"46143", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:26, company:"福州工业园区开发集团有限公司", name:"左海控股大楼办公家具", content:"左海控股大楼办公家具", amount:500, time:"46143", contact:"谢祥经理 18059291341", category:"供应链类" },
+        { seq:27, company:"福州左海置地有限公司", name:"金山文翠入户门电子锁", content:"金山文翠入户门电子锁476户", amount:300, time:"46143", contact:"何祖兴经理 13960834522", category:"供应链类" },
+        { seq:28, company:"福州工业园区开发集团有限公司", name:"福州工业园区开发集团有限公司2026年度集采项目前期临设施工", content:"福州工业园区开发集团有限公司2026年度集采项目前期临设施工", amount:750, time:"46143", contact:"谢成兰18705006867", category:"供应链类" },
+        { seq:29, company:"福州工业园区开发集团有限公司", name:"2026年度集采项目建筑垃圾运输专业分包", content:"2026年度集采项目建筑垃圾运输专业分包", amount:715, time:"46143", contact:"谢成兰18705006867", category:"载体类" },
+        { seq:30, company:"福州工业园区开发集团有限公司", name:"2026-2027年度福州市建材检测技术服务集中采购", content:"2026-2027年度福州市建材检测技术服务集中采购", amount:216, time:"46174", contact:"谢成兰18705006867", category:"配套服务类" },
+        { seq:31, company:"福州工业园区开发集团有限公司", name:"福州工业园区开发集团有限公司喷绘制作类集中采购", content:"福州工业园区开发集团有限公司喷绘制作类集中采购", amount:98, time:"46174", contact:"谢成兰18705006867", category:"供应链类" },
+        { seq:32, company:"福州工业园区开发集团有限公司", name:"福州工业园区开发集团有限公司2026年度履约保证、预付款保证保险服务采购", content:"福州工业园区开发集团有限公司2026年度履约保证、预付款保证保险服务采购", amount:100, time:"46174", contact:"谢成兰18705006867", category:"配套服务类" },
+        { seq:33, company:"福州工业园区开发集团有限公司", name:"2026年度安全生产责任险保险集中采购", content:"2026年度安全生产责任险保险集中采购", amount:50, time:"46174", contact:"谢成兰18705006867", category:"配套服务类" },
+        { seq:34, company:"福州左海置地有限公司", name:"云山宸院入户门及电子锁", content:"云山宸院入户门电子锁230户", amount:300, time:"46143", contact:"余日荣13860470312", category:"供应链类" },
+        { seq:35, company:"福州左海置地有限公司", name:"其余开发项目管桩", content:"福州五区八县预估27万米供货地址：福州市仓山区、晋安区、鼓楼区、台江区、马尾区", amount:10000, time:"2026年4-12月", contact:"黄秀琴13850141806", category:"供应链类" },
+        { seq:36, company:"福州工业园区开发集团有限公司", name:"马尾海洋精工产业园项目3#楼制冷系统设备采购及安装", content:"马尾海洋精工产业园项目3#楼冷链仓储中心的制冷系统设备的采购及安装", amount:1000, time:"46143", contact:"吴云魁15052688889", category:"载体类" },
+        { seq:37, company:"福州安住发展有限公司", name:"2026年度新媒体运营", content:"新媒体运营", amount:48, time:"46143", contact:"万芳经理18650756707", category:"配套服务类" },
+        { seq:38, company:"福州安住发展有限公司", name:"2026年度IP周边设计及制作", content:"礼品定制", amount:30, time:"46143", contact:"万芳经理18650756707", category:"配套服务类" },
+        { seq:39, company:"福州安住发展有限公司", name:"2026年度品牌发布会", content:"大型活动", amount:30, time:"46266", contact:"万芳经理18650756707", category:"配套服务类" },
+        { seq:40, company:"福州安住发展有限公司", name:"2026年度大学生艺术展演", content:"大型活动", amount:30, time:"46143", contact:"万芳经理18650756707", category:"配套服务类" },
+        { seq:41, company:"福州安住发展有限公司", name:"2026年度福州大学生运动会", content:"大型活动", amount:30, time:"46235", contact:"万芳经理18650756707", category:"配套服务类" },
+        { seq:42, company:"福州市园开新筑有限公司", name:"义序vr沙盘招标", content:"vr沙盘", amount:45, time:"46143", contact:"吴宇轩15750850221", category:"配套服务类" },
+        { seq:43, company:"福州市园开新筑有限公司", name:"义序实体品牌墙", content:"营销环境改造", amount:30, time:"46296", contact:"吴宇轩15750850221", category:"配套服务类" },
+        { seq:44, company:"福州市园开新海有限公司", name:"马尾的海洋经济发布会", content:"活动", amount:30, time:"46143", contact:"吴宇轩15750850221", category:"配套服务类" },
+        { seq:45, company:"福州左海置地有限公司", name:"紫阳隐翠项目采购", content:"施工工艺工法间", amount:50, time:"46143", contact:"林钰颖18659987517", category:"配套服务类" },
+        { seq:46, company:"福州左海置地有限公司", name:"左海置地品牌采购", content:"品牌发布会", amount:80, time:"46203", contact:"张鑫18459183876", category:"配套服务类" },
+        { seq:47, company:"福州左海置地有限公司", name:"复园路地块", content:"VR系统", amount:35, time:"46266", contact:"章志豪15060299789", category:"配套服务类" },
+        { seq:48, company:"福州左海置地有限公司", name:"复园路地块", content:"电子屏幕", amount:35, time:"46266", contact:"章志豪15060299789", category:"配套服务类" },
+        { seq:49, company:"福州左海置地有限公司", name:"复园路地块", content:"围挡", amount:40, time:"46266", contact:"章志豪15060299789", category:"配套服务类" },
+        { seq:50, company:"福州工业园区开发集团有限公司", name:"江湾道", content:"幕墙、门窗工程", amount:3200, time:"46143", contact:"肖敏15880247321", category:"载体类" },
+        { seq:51, company:"福州工业园区开发集团有限公司", name:"滨江鸣翠", content:"幕墙、门窗工程", amount:7700, time:"46143", contact:"陈盼捷18505076064", category:"载体类" },
+        { seq:52, company:"福州工业园区开发集团有限公司", name:"南湖郡项目", content:"幕墙工程", amount:1500, time:"46235", contact:"黄式应13599058973", category:"载体类" },
+        { seq:53, company:"福州工业园区开发集团有限公司", name:"金山文翠公馆", content:"幕墙、铝合金标段二工程", amount:3500, time:"46143", contact:"李宏18359103697", category:"载体类" },
+        { seq:54, company:"福州市园开安住有限公司", name:"紫阳项目", content:"幕墙、门窗工程", amount:2800, time:"46143", contact:"张诗康18559927030", category:"载体类" },
+        { seq:55, company:"福州工业园区开发集团有限公司", name:"云山宸院", content:"幕墙、门窗工程", amount:2400, time:"46143", contact:"彭博18850543116", category:"载体类" },
+        { seq:56, company:"福州工业园区开发集团有限公司", name:"缦合公馆", content:"幕墙、门窗工程标段一", amount:800, time:"46143", contact:"郑剑彬13666946879", category:"载体类" },
+        { seq:57, company:"福州左海置地有限公司", name:"复园路地块", content:"开放活动", amount:50, time:"46266", contact:"章志豪15060299789", category:"配套服务类" },
+        { seq:58, company:"福州左海置地有限公司", name:"复园路地块", content:"沙盘及户模制作", amount:35, time:"46266", contact:"章志豪15060299789", category:"配套服务类" },
+        { seq:59, company:"福州交通新能源科技有限公司", name:"斗门充电设备维保服务采购", content:"维保服务", amount:28, time:"46174", contact:"市场运营部经理林锋泉13015788085", category:"配套服务类" },
+        { seq:60, company:"福州交通新能源科技有限公司", name:"化工桥下地块、国货互通A地块充电基础设施项目箱变设备采购", content:"3台800KVA、1台630KVA", amount:120, time:"46174", contact:"市场运营部经理林锋泉13015788085", category:"配套服务类" },
+        { seq:61, company:"元洪两国双园（福建）控股集团有限公司", name:"两国双园食品产业园项目物业管理服务", content:"项目位于福清市城头镇,总占地面积约68亩，总建筑面积约7.5万㎡，含14栋标准厂房及1栋宿舍楼，项目主要运营管理总建筑面积约7.5万平方米的物业,目前项目在建设阶段，预计2026年建设完成，拟寻找具有丰富经验的物业管理单位合作。", amount:150, time:"46143", contact:"丁晨曦经理18659134069", category:"配套服务类" },
+        { seq:62, company:"元洪两国双园（福建）控股集团有限公司", name:"两国双园食品产业园分布式光伏投建营项目", content:"项目位于福清市城头镇,总占地面积约68亩，总建筑面积约7.5万㎡，含14栋标准厂房及1栋宿舍楼,目前项目在建设阶段，预计2026年建设完成。拟寻找有经验的新能源光伏服务单位，为入驻企业制定兴能源节电方案。", amount:1000, time:"46174", contact:"丁晨曦经理18659134069", category:"载体类" },
+        { seq:63, company:"元洪两国双园（福建）控股集团有限公司", name:"中印尼海洋装备制造产业园分布式光伏投建营项目", content:"项目位于福清市城头镇,总占地面积约98亩，总建筑面积约9.2万㎡。目前项目在建设阶段，预计2027年建设完成。拟寻找有经验的新能源光伏服务单位，为入驻企业制定兴能源节电方案。", amount:2000, time:"46235", contact:"丁晨曦经理18659134069", category:"载体类" }
     ];
 
     // 辅助函数：时间格式化
@@ -516,11 +625,13 @@
         return str;
     }
 
-    // ---------- 场景模块 ----------
+    // 场景模块渲染
     let currentScenarioFilter = "all";
     function renderScenario() {
         let filtered = projectsData;
-        if (currentScenarioFilter !== "all") filtered = projectsData.filter(p => p.industry.toLowerCase().includes(currentScenarioFilter.toLowerCase()));
+        if (currentScenarioFilter !== "all") {
+            filtered = projectsData.filter(p => p.industry.toLowerCase().includes(currentScenarioFilter.toLowerCase()));
+        }
         const container = document.getElementById("dynamicList");
         if (!filtered.length) { container.innerHTML = `<div class="empty-state"><i class="fas fa-filter"></i><p>暂无匹配项目</p></div>`; return; }
         let html = "";
@@ -534,7 +645,7 @@
         container.innerHTML = html;
     }
 
-    // ---------- 政策模块 ----------
+    // 政策模块渲染（带展开收起）
     let currentPolicyFilter = "all";
     function renderPolicy() {
         let filtered = policiesRaw;
@@ -576,7 +687,7 @@
         });
     }
 
-    // ---------- 采购模块 ----------
+    // 采购模块渲染（带展开收起）
     function renderProcurement() {
         const map = new Map();
         procurementData.forEach(p => { if(!map.has(p.category)) map.set(p.category, []); map.get(p.category).push(p); });
@@ -667,7 +778,6 @@
         });
     }
 
-    // 事件绑定
     document.querySelectorAll(".entry-card").forEach(card => {
         card.addEventListener("click", () => showModule(card.getAttribute("data-module")));
     });
