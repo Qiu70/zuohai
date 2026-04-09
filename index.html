@@ -12,18 +12,24 @@
             padding: 0;
             box-sizing: border-box;
         }
-        html, body {
+        /* 背景层独立固定，解决移动端背景变化问题 */
+        .bg-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
             /* 请将下面的图片路径替换为您自己的背景图 */
-            background-image: url('背景.jpg'); /* 修改此处为实际图片路径 */
-            background-size: cover;          /* 覆盖整个视口，保持比例 */
-            background-position: top center; /* 优先显示顶部（图标区域） */
-            background-attachment: fixed;    /* 关键：背景固定，不随滚动变化 */
+            background-image: url('您的背景图.jpg'); /* 修改此处 */
+            background-size: cover;
+            background-position: top center;
             background-repeat: no-repeat;
-            background-color: #2a0a4a;       /* 底色 */
+            z-index: -2;
+        }
+        /* 备用纯色背景，图片加载时显示 */
+        body {
+            background-color: #2a0a4a;
+            font-family: 'Inter', sans-serif;
             color: #f0eaff;
             padding: 0 0 32px 0;
             line-height: 1.45;
@@ -36,10 +42,10 @@
             position: relative;
             z-index: 1;
         }
-        /* 头部：下移留出背景图标空间 */
+        /* 头部：上移标题（减小 margin-top） */
         .hero {
             text-align: center;
-            margin-top: 120px;               /* 根据背景图标位置调整此值 */
+            margin-top: 60px;               /* 从120px减小到60px，标题上移 */
             margin-bottom: 24px;
             padding: 20px 16px;
             background: rgba(0,0,0,0.35);
@@ -367,8 +373,11 @@
     </style>
 </head>
 <body>
+<!-- 独立固定背景层，解决移动端背景变化问题 -->
+<div class="bg-fixed"></div>
+
 <div class="app-container">
-    <!-- 头部：无独立图标，背景图中已包含，标题下移120px -->
+    <!-- 头部：标题上移 -->
     <div class="hero">
         <h1>2026左海产业生态大会</h1>
         <div class="sub">场景项目 · 支持政策 · 采购计划 · 全链赋能</div>
