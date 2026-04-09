@@ -12,15 +12,14 @@
             padding: 0;
             box-sizing: border-box;
         }
-        /* 背景层独立固定，解决移动端背景变化问题 */
+        /* 背景层独立固定 */
         .bg-fixed {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* 请将下面的图片路径替换为您自己的背景图 */
-            background-image: url('背景.jpg'); /* 修改此处 */
+            background-image: url('您的背景图.jpg'); /* 请替换为实际图片路径 */
             background-size: cover;
             background-position: top center;
             background-repeat: no-repeat;
@@ -186,56 +185,146 @@
             gap: 18px;
             margin-bottom: 24px;
         }
-        .project-card, .policy-card, .procurement-card {
+        /* 分组卡片样式 */
+        .category-group-card {
             background: rgba(255,255,255,0.94);
             backdrop-filter: blur(4px);
             border-radius: 28px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             border: 1px solid rgba(255,255,255,0.5);
             overflow: hidden;
-            color: #1f1a2e;
+            margin-bottom: 18px;
+        }
+        .group-header {
+            padding: 16px 18px;
+            background: rgba(240, 230, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #3c1c6e;
+        }
+        .group-header i {
+            transition: transform 0.2s;
+        }
+        .group-content {
+            display: none;
+            border-top: 1px solid rgba(100,70,140,0.2);
+        }
+        .group-content.show {
+            display: block;
+        }
+        /* 政策条目样式 */
+        .policy-item {
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(100,70,140,0.1);
+        }
+        .policy-item:last-child {
+            border-bottom: none;
+        }
+        .policy-detail {
+            font-size: 0.85rem;
+            line-height: 1.45;
+            color: #2e2444;
+            margin-bottom: 8px;
+        }
+        /* 彩色标签组 - 增强版 */
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        .tag-company { background: #d9c5ff; color: #3c1c6e; }      /* 紫色 - 权属企业 */
+        .tag-amount { background: #ffe0b5; color: #a65a2a; }        /* 橙色 - 金额 */
+        .tag-time { background: #b8e1ff; color: #1a5a8a; }          /* 蓝色 - 时间 */
+        .tag-contact { background: #c8f0e0; color: #1e6b5e; }       /* 绿色 - 联系人 */
+        .tag-applicable { background: #c4e0fa; color: #1e5a8a; }    /* 浅蓝色 - 适用条件（与公司区分） */
+
+        /* 采购条目样式 */
+        .procurement-item {
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(100,70,140,0.1);
+        }
+        .procurement-item:last-child {
+            border-bottom: none;
+        }
+        .item-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #3c1c6e;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .item-desc {
+            font-size: 0.85rem;
+            line-height: 1.45;
+            color: #2e2444;
+            margin-bottom: 8px;
+        }
+        .item-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        /* 场景卡片样式 */
+        .project-card {
+            background: rgba(255,255,255,0.94);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.5);
+            overflow: hidden;
+            margin-bottom: 18px;
         }
         .card-header {
             padding: 16px 18px 8px 18px;
-            border-bottom: 1px solid rgba(100, 70, 140, 0.2);
+            border-bottom: 1px solid rgba(100,70,140,0.2);
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             flex-wrap: wrap;
             gap: 8px;
         }
-        .project-title, .card-title {
+        .project-title {
             font-size: 1rem;
             font-weight: 700;
             color: #3c1c6e;
             line-height: 1.35;
             flex: 1;
         }
-        .industry-tag, .cat-badge {
+        .industry-tag {
             background: #e2d5ff;
             padding: 4px 12px;
             border-radius: 40px;
             font-size: 0.7rem;
             font-weight: 600;
             color: #4c2a8a;
-            white-space: nowrap;
         }
-        .card-meta, .meta-row {
+        .card-meta {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
             padding: 10px 18px 0 18px;
             font-size: 0.7rem;
-            color: #5a4680;
             border-bottom: 1px solid rgba(100,70,140,0.15);
-        }
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            background: #f2ecff;
-            padding: 4px 10px;
-            border-radius: 40px;
         }
         .section-block {
             padding: 12px 18px;
@@ -252,7 +341,7 @@
             align-items: center;
             gap: 6px;
         }
-        .desc-text, .policy-detail {
+        .desc-text {
             font-size: 0.85rem;
             line-height: 1.45;
             color: #2e2444;
@@ -276,74 +365,13 @@
             gap: 12px;
             font-size: 0.7rem;
         }
-        .contact-info, .meta-tag {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: #f2ecff;
-            padding: 6px 12px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            color: #3b2a5c;
-        }
-        .validity-badge, .item-amount {
+        .validity-badge {
             background: #fff0df;
             padding: 4px 12px;
             border-radius: 40px;
             font-size: 0.65rem;
             font-weight: 500;
             color: #a65a2a;
-        }
-        .procurement-card .item-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #3c1c6e;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-        .procurement-card .item-desc {
-            font-size: 0.85rem;
-            line-height: 1.45;
-            color: #2e2444;
-            margin-bottom: 8px;
-        }
-        .procurement-card .item-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 6px;
-        }
-        .procurement-list {
-            padding: 8px 0 0 0;
-        }
-        .procurement-item {
-            padding: 14px 18px;
-            border-bottom: 1px solid rgba(100,70,140,0.1);
-        }
-        .procurement-item:last-child {
-            border-bottom: none;
-        }
-        .expand-btn {
-            background: rgba(230, 220, 250, 0.8);
-            text-align: center;
-            padding: 12px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #5e2c9e;
-            border-top: 1px solid rgba(100,70,140,0.2);
-            cursor: pointer;
-            transition: 0.1s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-        .hidden {
-            display: none;
         }
         .empty-state {
             text-align: center;
@@ -386,7 +414,7 @@
             <div class="entry-icon"><i class="fas fa-file-alt"></i></div>
             <div class="entry-info">
                 <div class="entry-title">配套支持政策</div>
-                <div class="entry-desc">人才·科创·出海·金融·订单·政务等7大类80+政策</div>
+                <div class="entry-desc">人才·科创·出海·金融·订单·政务等6大类70+政策</div>
             </div>
             <i class="fas fa-chevron-right" style="color:#9b7bcb;"></i>
         </div>
@@ -430,7 +458,6 @@
                     <div data-filter="订单开放与供应链提质" class="filter-chip">📦 订单供应链</div>
                     <div data-filter="政务与营商环境支持" class="filter-chip">⚙️ 政务营商</div>
                     <div data-filter="其他政策" class="filter-chip">🏠 其他惠企</div>
-                    <div data-filter="两国双园专项" class="filter-chip">🇮🇩 两国双园专项</div>
                 </div>
             </div>
         </div>
@@ -443,7 +470,7 @@
 </div>
 
 <script>
-    // ======================= 场景项目数据（10条，完整） =======================
+    // ======================= 场景项目数据（10条） =======================
     const projectsData = [
         { id:1, name:"福州车网互动V2G智检充电基础设施项目", industry:"新能源", desc:"项目选址福州市域内，用地面积超1000平方米，总投资约1亿元，采用V2G技术+电池检测技术的充电基础设施，通过对13个公交场站和11个公共停车场新建或升级改造约562个充电车位，形成“公交枢纽充电+社会公共充电”互补的城市充电网络体系。", cooperation:"在充电桩建设方面需求场地、资金合作", district:"福州市域", owner:"福州交通新能源科技有限公司", investment:"0.5", validityRaw:"2026-12-31", contact:"规划发展部 徐佳琛 18850132219" },
         { id:2, name:"中印尼“两国双园”片区智能化产业园", industry:"智慧物业管理", desc:"项目位于福清市城头镇,总投资0.03亿元，主要招引物业管理行业的企业，项目主要运营管理总建筑面积约7.5万平方米的物业,将打造中印尼“两国双园”片区内智能化产业园物业标杆项目，目前项目在立项阶段。", cooperation:"寻找在物业管理行业的技术合作", district:"福清市", owner:"元洪两国双园（福建）控股集团有限公司", investment:"0.03", validityRaw:"2026年12月", contact:"丁晨曦 18659134069" },
@@ -457,7 +484,7 @@
         { id:10, name:"福州左海置地有限公司", industry:"新媒体、AI", desc:"城市生活服务商，构建“好房子”标准，落地“左海好生活”。", cooperation:"多业态合作，新媒体、AI、VR、展厅、绿色食品等赋能。", district:"晋安区", owner:"福州左海置地有限公司", investment:"近200亿元", validityRaw:"长期有效", contact:"福州左海置地有限公司" }
     ];
 
-    // ======================= 配套支持政策（完整版，共约85条） =======================
+    // ======================= 配套支持政策（完整真实，无“两国双园”内容） =======================
     const policiesRaw = [
         // 人才支持与服务保障 (11条)
         { category:"人才支持与服务保障", content:"入园企业员工租房享受优惠90%；毕业两年内享学生折扣95%。", applicable:"加入左海生态联盟企业、左海体系供应商、海交所注册企业、园区企业、符合人才认定标准", owner:"工业园区集团（U厝公寓）、置业集团等" },
@@ -529,20 +556,7 @@
         { category:"其他政策", content:"购买办公产品、厂房、研办楼享受折扣（最高1900元/㎡优惠、95折、9折等）。", applicable:"入园企业", owner:"工业园区集团" },
         { category:"其他政策", content:"租赁厂房享免租期。", applicable:"左海产业载体", owner:"工业园区集团" },
         { category:"其他政策", content:"公交车广告位优惠。", applicable:"合作企业", owner:"公交集团" },
-        { category:"其他政策", content:"购买两国双园食创城项目厂房最高96折，可按需定制。", applicable:"入驻两国双园片区", owner:"两国双园集团" },
-        // 两国双园专项 (新增多条，基于政策案例)
-        { category:"两国双园专项", content:"对从印尼进口到元洪或从元洪出口到印尼的集装箱货主企业，每重箱奖励300元，单家年度最高500万元。", applicable:"落地示范园区、经由福州港口运输", owner:"两国双园集团" },
-        { category:"两国双园专项", content:"陆运至元洪区集装箱重箱奖励100-200元/箱，单家最高300万元。", applicable:"从事中印尼进出口业务", owner:"两国双园集团" },
-        { category:"两国双园专项", content:"印尼进口货物存储在元洪公共冷链设施，按0.6元/天/吨奖励，最高100万元。", applicable:"使用元洪区公共冷链", owner:"两国双园集团" },
-        { category:"两国双园专项", content:"园区产品申请印尼清真认证/流通许可，每项奖励2万元。", applicable:"产品出口印尼", owner:"两国双园集团" },
-        { category:"两国双园专项", content:"新开通元洪至印尼集装箱航线且年运行≥24航次，奖励船运公司200万元。", applicable:"航线运营方", owner:"两国双园集团" },
-        { category:"两国双园专项", content:"支持示范园区企业享受跨境贷、出口信保补助30%，三级合计最高75%。", applicable:"有出口实绩", owner:"两国双园集团" },
-        { category:"两国双园专项", content:"新注册中印尼经贸企业前2年地方经济贡献100%奖励，后3年50%。", applicable:"示范园区新企业", owner:"两国双园集团" },
-        { category:"两国双园专项", content:"外商投资实际到资500万美元以上按2%奖励，最高1000万元。", applicable:"外资企业", owner:"两国双园集团" },
-        { category:"两国双园专项", content:"水产精深加工生产线新增投资超100万元补助30%，最高500万元；冷库改造最高300万元。", applicable:"园区水产品企业", owner:"两国双园集团" },
-        { category:"两国双园专项", content:"示范园区工业企业技改追加补助10%。", applicable:"获得市级技改补助", owner:"两国双园集团" },
-        { category:"两国双园专项", content:"国家知识产权优势企业奖励10万元，示范企业通过复核奖励5万元。", applicable:"园区内企业", owner:"两国双园集团" },
-        { category:"两国双园专项", content:"支持中印尼跨境贸易企业申请“跨境贷”，政策性银行低利率融资。", applicable:"中印尼跨境贸易", owner:"两国双园集团" }
+        { category:"其他政策", content:"购买两国双园食创城项目厂房最高96折，可按需定制。", applicable:"入驻两国双园片区", owner:"两国双园集团" }
     ];
 
     // ======================= 采购计划清单（完整63条） =======================
@@ -612,7 +626,6 @@
         { seq:63, company:"元洪两国双园（福建）控股集团有限公司", name:"中印尼海洋装备制造产业园分布式光伏投建营项目", content:"项目位于福清市城头镇,总占地面积约98亩，总建筑面积约9.2万㎡。目前项目在建设阶段，预计2027年建设完成。拟寻找有经验的新能源光伏服务单位，为入驻企业制定兴能源节电方案。", amount:2000, time:"46235", contact:"丁晨曦经理18659134069", category:"载体类" }
     ];
 
-    // 辅助函数：时间格式化
     function formatTime(timeStr) {
         if (!timeStr) return '待定';
         let str = timeStr.toString().trim();
@@ -625,7 +638,7 @@
         return str;
     }
 
-    // 场景模块渲染
+    // 场景模块
     let currentScenarioFilter = "all";
     function renderScenario() {
         let filtered = projectsData;
@@ -637,92 +650,127 @@
         let html = "";
         filtered.forEach(p => {
             html += `<div class="project-card"><div class="card-header"><div class="project-title">${p.name}</div><div class="industry-tag">${p.industry.split(',')[0]}</div></div>
-                    <div class="card-meta"><span class="meta-item"><i class="fas fa-map-marker-alt"></i> ${p.district}</span><span class="meta-item"><i class="fas fa-chart-line"></i> ${p.investment}亿元</span><span class="meta-item"><i class="fas fa-building"></i> ${p.owner}</span></div>
+                    <div class="card-meta"><span class="tag tag-company"><i class="fas fa-building"></i> ${p.owner}</span><span class="tag tag-amount"><i class="fas fa-chart-line"></i> ${p.investment}亿元</span><span class="tag tag-time"><i class="fas fa-map-marker-alt"></i> ${p.district}</span></div>
                     <div class="section-block"><div class="section-label"><i class="fas fa-align-left"></i> 场景描述</div><div class="desc-text">${p.desc}</div></div>
                     <div class="section-block"><div class="section-label"><i class="fas fa-handshake"></i> 合作需求</div><div class="coop-text">${p.cooperation}</div></div>
-                    <div class="card-footer"><div class="contact-info"><i class="fas fa-phone-alt"></i> ${p.contact}</div><div class="validity-badge">${p.validityRaw}</div></div></div>`;
+                    <div class="card-footer"><div class="tag tag-contact"><i class="fas fa-phone-alt"></i> ${p.contact}</div><div class="validity-badge">${p.validityRaw}</div></div></div>`;
         });
         container.innerHTML = html;
     }
 
-    // 政策模块渲染（带展开收起）
+    // 政策模块 - 二级分组（无两国双园）
     let currentPolicyFilter = "all";
     function renderPolicy() {
         let filtered = policiesRaw;
-        if (currentPolicyFilter !== "all") filtered = policiesRaw.filter(p => p.category === currentPolicyFilter);
+        if (currentPolicyFilter !== "all") {
+            filtered = policiesRaw.filter(p => p.category === currentPolicyFilter);
+        }
+        const groupMap = new Map();
+        filtered.forEach(p => {
+            if (!groupMap.has(p.category)) groupMap.set(p.category, []);
+            groupMap.get(p.category).push(p);
+        });
         const container = document.getElementById("dynamicList");
-        if (!filtered.length) { container.innerHTML = `<div class="empty-state"><i class="fas fa-filter"></i><p>暂无匹配政策</p></div>`; return; }
-        const map = new Map();
-        filtered.forEach(p => { if(!map.has(p.category)) map.set(p.category, []); map.get(p.category).push(p); });
-        let html = "";
-        for (let [cat, items] of map.entries()) {
+        if (groupMap.size === 0) {
+            container.innerHTML = `<div class="empty-state"><i class="fas fa-filter"></i><p>暂无匹配政策</p></div>`;
+            return;
+        }
+        let html = '';
+        for (let [cat, items] of groupMap.entries()) {
             const total = items.length;
-            html += `<div class="policy-card" data-category="${cat}"><div class="card-header"><div class="card-title">${cat}</div><div class="cat-badge">${total}条</div></div><div class="procurement-list">`;
-            items.forEach((item, idx) => {
-                const hidden = idx >= 3 ? 'hidden' : '';
-                html += `<div class="procurement-item ${hidden}"><div class="policy-detail" style="margin-bottom:6px;">${item.content}</div><div class="meta-row" style="padding:0"><div class="meta-tag"><i class="fas fa-building"></i> ${item.owner}</div><div class="meta-tag"><i class="fas fa-check-circle"></i> ${item.applicable}</div></div></div>`;
+            let innerHtml = `<div class="procurement-list">`;
+            items.forEach(item => {
+                innerHtml += `
+                    <div class="policy-item">
+                        <div class="policy-detail">${item.content}</div>
+                        <div class="tag-group">
+                            <span class="tag tag-company"><i class="fas fa-building"></i> ${item.owner}</span>
+                            <span class="tag tag-applicable"><i class="fas fa-check-circle"></i> ${item.applicable}</span>
+                        </div>
+                    </div>
+                `;
             });
-            html += `</div>${total > 3 ? `<div class="expand-btn" data-category-expand="${cat}"><i class="fas fa-chevron-down"></i> 展开全部 (${total}条)</div>` : ''}</div>`;
+            innerHtml += `</div>`;
+            html += `
+                <div class="category-group-card" data-group-category="${cat}">
+                    <div class="group-header">
+                        <span>${cat} <span style="font-size:0.8rem; background:rgba(100,70,140,0.2); padding:2px 8px; border-radius:20px;">${total}条</span></span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="group-content">${innerHtml}</div>
+                </div>
+            `;
         }
         container.innerHTML = html;
-        attachPolicyExpand();
-    }
-    function attachPolicyExpand() {
-        document.querySelectorAll('[data-category-expand]').forEach(btn => {
-            btn.replaceWith?.(btn.cloneNode(true));
-        });
-        document.querySelectorAll('[data-category-expand]').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const cat = btn.getAttribute('data-category-expand');
-                const card = document.querySelector(`.policy-card[data-category="${cat}"]`);
-                const hiddenItems = card.querySelectorAll('.procurement-item.hidden');
-                if (hiddenItems.length) {
-                    hiddenItems.forEach(i => i.classList.remove('hidden'));
-                    btn.innerHTML = '<i class="fas fa-chevron-up"></i> 收起';
+        document.querySelectorAll('.category-group-card').forEach(card => {
+            const header = card.querySelector('.group-header');
+            const content = card.querySelector('.group-content');
+            const icon = header.querySelector('i');
+            header.addEventListener('click', () => {
+                const isOpen = content.classList.contains('show');
+                if (isOpen) {
+                    content.classList.remove('show');
+                    icon.className = 'fas fa-chevron-down';
                 } else {
-                    card.querySelectorAll('.procurement-item').forEach((item, idx) => { if(idx >= 3) item.classList.add('hidden'); });
-                    btn.innerHTML = '<i class="fas fa-chevron-down"></i> 展开全部';
+                    content.classList.add('show');
+                    icon.className = 'fas fa-chevron-up';
                 }
             });
         });
     }
 
-    // 采购模块渲染（带展开收起）
+    // 采购模块 - 二级分组
     function renderProcurement() {
-        const map = new Map();
-        procurementData.forEach(p => { if(!map.has(p.category)) map.set(p.category, []); map.get(p.category).push(p); });
+        const groupMap = new Map();
+        procurementData.forEach(p => {
+            if (!groupMap.has(p.category)) groupMap.set(p.category, []);
+            groupMap.get(p.category).push(p);
+        });
         const order = ["供应链类","载体类","配套服务类"];
-        const sorted = Array.from(map.entries()).sort((a,b)=> order.indexOf(a[0])-order.indexOf(b[0]));
+        const sorted = Array.from(groupMap.entries()).sort((a,b)=> order.indexOf(a[0])-order.indexOf(b[0]));
         const container = document.getElementById("dynamicList");
-        let html = "";
+        let html = '';
         for (let [cat, items] of sorted) {
             const total = items.length;
-            html += `<div class="procurement-card" data-category-proc="${cat}"><div class="card-header"><div class="card-title">${cat}</div><div class="cat-badge">${total}项</div></div><div class="procurement-list">`;
-            items.forEach((item, idx) => {
-                const hidden = idx >= 3 ? 'hidden' : '';
+            let innerHtml = `<div class="procurement-list">`;
+            items.forEach(item => {
                 const amountStr = item.amount ? `${item.amount}万元` : '—';
-                html += `<div class="procurement-item ${hidden}"><div class="item-title"><span>${item.name}</span><span class="item-amount"><i class="fas fa-yen-sign"></i> ${amountStr}</span></div><div class="item-desc">${item.content}</div><div class="item-meta"><span class="meta-tag"><i class="fas fa-building"></i> ${item.company}</span><span class="meta-tag"><i class="fas fa-user"></i> ${item.contact}</span><span class="meta-tag"><i class="far fa-calendar-alt"></i> ${formatTime(item.time)}</span></div></div>`;
+                innerHtml += `
+                    <div class="procurement-item">
+                        <div class="item-title"><span>${item.name}</span><span class="tag tag-amount"><i class="fas fa-yen-sign"></i> ${amountStr}</span></div>
+                        <div class="item-desc">${item.content}</div>
+                        <div class="item-meta">
+                            <span class="tag tag-company"><i class="fas fa-building"></i> ${item.company}</span>
+                            <span class="tag tag-contact"><i class="fas fa-user"></i> ${item.contact}</span>
+                            <span class="tag tag-time"><i class="far fa-calendar-alt"></i> ${formatTime(item.time)}</span>
+                        </div>
+                    </div>
+                `;
             });
-            html += `</div>${total > 3 ? `<div class="expand-btn" data-category-proc-expand="${cat}"><i class="fas fa-chevron-down"></i> 展开全部 (${total}条)</div>` : ''}</div>`;
+            innerHtml += `</div>`;
+            html += `
+                <div class="category-group-card" data-group-category="${cat}">
+                    <div class="group-header">
+                        <span>${cat} <span style="font-size:0.8rem; background:rgba(100,70,140,0.2); padding:2px 8px; border-radius:20px;">${total}项</span></span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="group-content">${innerHtml}</div>
+                </div>
+            `;
         }
         container.innerHTML = html;
-        attachProcurementExpand();
-    }
-    function attachProcurementExpand() {
-        document.querySelectorAll('[data-category-proc-expand]').forEach(btn => {
-            btn.replaceWith?.(btn.cloneNode(true));
-        });
-        document.querySelectorAll('[data-category-proc-expand]').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const cat = btn.getAttribute('data-category-proc-expand');
-                const card = document.querySelector(`.procurement-card[data-category-proc="${cat}"]`);
-                const hiddenItems = card.querySelectorAll('.procurement-item.hidden');
-                if (hiddenItems.length) {
-                    hiddenItems.forEach(i => i.classList.remove('hidden'));
-                    btn.innerHTML = '<i class="fas fa-chevron-up"></i> 收起';
+        document.querySelectorAll('.category-group-card').forEach(card => {
+            const header = card.querySelector('.group-header');
+            const content = card.querySelector('.group-content');
+            const icon = header.querySelector('i');
+            header.addEventListener('click', () => {
+                const isOpen = content.classList.contains('show');
+                if (isOpen) {
+                    content.classList.remove('show');
+                    icon.className = 'fas fa-chevron-down';
                 } else {
-                    card.querySelectorAll('.procurement-item').forEach((item, idx) => { if(idx >= 3) item.classList.add('hidden'); });
-                    btn.innerHTML = '<i class="fas fa-chevron-down"></i> 展开全部';
+                    content.classList.add('show');
+                    icon.className = 'fas fa-chevron-up';
                 }
             });
         });
